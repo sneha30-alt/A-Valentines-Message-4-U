@@ -1,7 +1,9 @@
-![Image of Valentines Message 4 U site](https://i.imgur.com/SISrpEH.png)
+![Screenshot of Valentine's site](https://i.imgur.com/SISrpEH.png)
 
-# A Site To Send Mobile Valentines To My Friends
+# Will You Sweeten My Heart? 🍓💕
 
-This Valentines, 2025, I wanted to let all my friends know how much they mean to me via Lego Valentines! Randomized ofc!
+For my cutest cutes—this Valentine's, I've put together a personalized site asking: **"Will you be my Valentine?"**
 
-Also using [system.css](https://sakofchit.github.io/system.css/) for some of the styling. Cheers!
+Randomized romantic puns like "You're berry sweet—I love you a waffle lot!" and "Olive you more than pizza!" with our photos. You're the honey to my tea, making every day deliciously cheesy! 😘
+
+Mobile-optimized for sweet date night surprises. Still using [system.css](https://sakofchit.github.io/system.css/) for that retro Mac vibe. Forever sweeter together! ❤️🍯
