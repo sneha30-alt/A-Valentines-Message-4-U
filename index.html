@@ -1,24 +1,115 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>A Valentines Message 4 U</title>
-      <link rel="stylesheet" href="styles.css">
-      <link rel="stylesheet" href="https://unpkg.com/@sakun/system.css" />
-  </head>
-  <body>
-      
-  </body>
-  </html>
-  <body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="https://unpkg.com/@sakun/system.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; position: relative;
+        }
+        .hearts { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+        .heart { position: absolute; color: #ff69b4; font-size: 20px; animation: float 6s infinite linear; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
+        .container { text-align: center; z-index: 10; max-width: 400px; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3em; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        button {
+            padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 50px; cursor: pointer;
+            font-weight: 600; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .yes { background: linear-gradient(45deg, #ff6b9d, #c44569); color: white; }
+        .no {
+            background: linear-gradient(45deg, #f39c12, #e67e22); color: white; position: relative;
+            transition: all 0.1s; z-index: 5;
+        }
+        .no:hover { transform: scale(1.1); }
+        .followup { margin-top: 20px; min-height: 50px; }
+        .hidden { display: none !important; }
+        .celebration {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100;
+            text-align: center; background: rgba(255,255,255,0.95); padding: 40px; border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); animation: bounce 0.5s;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%) scale(0); } 40% { transform: translate(-50%, -50%) scale(1.1); } 60% { transform: translate(-50%, -50%) scale(1.05); } 100% { transform: translate(-50%, -50%) scale(1); } }
+        .gif { width: 200px; height: 200px; border-radius: 20px; }
+        @media (max-width: 500px) { h1 { font-size: 2em; } button { padding: 12px 24px; font-size: 1em; } }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
     <div class="container">
-        <button class="btn" id="refreshButton">Receive New Valentine <3</button>
-        <div id="valentines-container"></div>
-        <div class="standard-dialog center scale-down">
-            <p class="dialog-text">❤ lots o'love Claire &copy; 2025</p>
+        <h1>Will You Be My Valentine? 💕</h1>
+        <div class="buttons">
+            <button class="yes" onclick="celebrate()">Yes 😍</button>
+            <button class="no" id="noBtn" onmouseover="wander()">No 🙄</button>
         </div>
-    </div>  
-    <script src="./index.js"></script>
-  </body>
+        <div class="followup" id="followup"></div>
+    </div>
+
+    <script>
+        const followups = [
+            "Are you sure? 💔",
+            "Really? 😢",
+            "Why so mean? 🥺",
+            "Think again, honey! 😘",
+            "You can't be serious! 😱",
+            "Pretty please? 🥰"
+        ];
+
+        let noClicks = 0;
+        function wander() {
+            const noBtn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            const rect = container.getBoundingClientRect();
+            const maxX = rect.width - 120;
+            const maxY = rect.height - 80;
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
+        }
+
+        document.getElementById('noBtn').onclick = function() {
+            noClicks++;
+            const followup = document.getElementById('followup');
+            followup.textContent = followups[Math.floor(Math.random() * followups.length)];
+            followup.classList.remove('hidden');
+            setTimeout(() => followup.classList.add('hidden'), 2000);
+        };
+
+        function celebrate() {
+            document.querySelector('.container').innerHTML = `
+                <div class="celebration">
+                    <img class="gif" src="https://media.giphy.com/media/26ufnwz3wDUfck3aI/giphy.gif" alt="Yay! Hearts celebration">
+                    <h2>Yay! I knew it! 😍💖</h2>
+                    <p>Forever my sweetest Valentine! ❤️</p>
+                </div>
+            `;
+            // Add more hearts
+            for(let i=0; i<50; i++) {
+                setTimeout(() => createHeart(), i*100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        // Initial hearts
+        setInterval(createHeart, 3000);
+    </script>
+</body>
+</html>
